@@ -96,7 +96,7 @@ Exactly 3 pillars. Write for the stated ideal customer.`;
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
-      "x-api-key": process.env.ANTHROPIC_API_KEY,
+      "x-api-key": process.env.ANTHROPIC_API_KEY || process.env.Anthropic_API_Key_Content_Engine,
       "anthropic-version": "2023-06-01",
       "content-type": "application/json",
     },
@@ -115,7 +115,7 @@ Exactly 3 pillars. Write for the stated ideal customer.`;
 
 // Optional: push lead + preview into Close (only if CLOSE_API_KEY is set)
 async function pushToClose(payload, result) {
-  const key = process.env.CLOSE_API_KEY;
+  const key = process.env.CLOSE_API_KEY || process.env.CLOSE;
   if (!key) return;
   const auth = "Basic " + Buffer.from(key + ":").toString("base64");
   try {
