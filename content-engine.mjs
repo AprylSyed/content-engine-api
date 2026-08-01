@@ -93,10 +93,12 @@ Return ONLY valid JSON, no markdown fences, in exactly this shape:
 }
 Exactly 3 pillars. Write for the stated ideal customer.`;
 
+  const apiKey = ((process.env.ANTHROPIC_API_KEY || process.env.Content_Engine_Key_2 || "").trim().replace(/^["']|["']$/g, ""));
+  console.log("KEYINFO", apiKey.slice(0, 14), "len", apiKey.length);
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
-      "x-api-key": process.env.ANTHROPIC_API_KEY || process.env.Content_Engine_Key_2,
+      "x-api-key": apiKey,
       "anthropic-version": "2023-06-01",
       "content-type": "application/json",
     },
