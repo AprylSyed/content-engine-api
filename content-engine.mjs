@@ -93,7 +93,7 @@ Return ONLY valid JSON, no markdown fences, in exactly this shape:
 }
 Exactly 3 pillars. Write for the stated ideal customer.`;
 
-  const apiKey = ((process.env.ANTHROPIC_API_KEY || process.env.Content_Engine_Key_2 || "").trim().replace(/^["']|["']$/g, ""));
+  const apiKey = ((process.env.ANTHROPIC_API_KEY || process.env.Content_engine_Key_3 || "").trim().replace(/^["']|["']$/g, ""));
   console.log("KEYINFO", apiKey.slice(0, 14), "len", apiKey.length);
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
@@ -183,7 +183,7 @@ export default async function handler(req) {
     await pushToClose(payload, result);
     return new Response(JSON.stringify(result), { status: 200, headers: cors(origin) });
   } catch (e) {
-    console.log("GEN_ERR", String(e).slice(0, 500), "KEY_PRESENT", !!(process.env.ANTHROPIC_API_KEY || process.env.Content_Engine_Key_2));
+    console.log("GEN_ERR", String(e).slice(0, 500), "KEY_PRESENT", !!(process.env.ANTHROPIC_API_KEY || process.env.Content_engine_Key_3));
     return new Response(JSON.stringify({ error: "generation_failed", detail: String(e).slice(0, 300) }), { status: 502, headers: cors(origin) });
   }
 }
