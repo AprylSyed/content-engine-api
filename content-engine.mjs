@@ -93,7 +93,7 @@ Return ONLY valid JSON, no markdown fences, in exactly this shape:
 }
 Exactly 3 pillars. Write for the stated ideal customer.`;
 
-  const apiKey = ((process.env.ANTHROPIC_API_KEY || process.env.Content_engine_Key_3 || "").trim().replace(/^["']|["']$/g, ""));
+  const apiKey = ((process.env.Content_engine_Key_3 || process.env.ANTHROPIC_API_KEY || "").trim().replace(/^["']|["']$/g, ""));
   console.log("KEYINFO", apiKey.slice(0, 14), "len", apiKey.length);
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
@@ -120,7 +120,7 @@ Exactly 3 pillars. Write for the stated ideal customer.`;
 
 // Optional: push lead + preview into Close (only if CLOSE_API_KEY is set)
 async function pushToClose(payload, result) {
-  const key = process.env.CLOSE_API_KEY || process.env.CLOSE;
+  const key = process.env.CLOSE || process.env.CLOSE_API_KEY;
   if (!key) return;
   const auth = "Basic " + Buffer.from(key + ":").toString("base64");
   try {
