@@ -96,7 +96,7 @@ Exactly 3 pillars. Write for the stated ideal customer.`;
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
-      "x-api-key": process.env.ANTHROPIC_API_KEY || process.env.Anthropic_API_Key_Content_Engine,
+      "x-api-key": process.env.ANTHROPIC_API_KEY || process.env.Content_Engine_Key_2,
       "anthropic-version": "2023-06-01",
       "content-type": "application/json",
     },
@@ -181,7 +181,7 @@ export default async function handler(req) {
     await pushToClose(payload, result);
     return new Response(JSON.stringify(result), { status: 200, headers: cors(origin) });
   } catch (e) {
-    console.log("GEN_ERR", String(e).slice(0, 500), "KEY_PRESENT", !!(process.env.ANTHROPIC_API_KEY || process.env.Anthropic_API_Key_Content_Engine));
+    console.log("GEN_ERR", String(e).slice(0, 500), "KEY_PRESENT", !!(process.env.ANTHROPIC_API_KEY || process.env.Content_Engine_Key_2));
     return new Response(JSON.stringify({ error: "generation_failed", detail: String(e).slice(0, 300) }), { status: 502, headers: cors(origin) });
   }
 }
