@@ -129,6 +129,7 @@ async function pushToClose(payload, result) {
       headers: { Authorization: auth, "Content-Type": "application/json" },
       body: JSON.stringify({
         name: payload.company || payload.email,
+        status_id: process.env.CTA_STATUS_ID || "stat_kD3EJtweIOIn3uMxSqshHNh5bVOxnNSyWZIeEzH1hi1", // "CTA Lead - No Booking Yet" -> auto-enrolls follow-up workflow
         url: normalizeUrl(payload.website) || undefined,
         contacts: [{ name: payload.email, emails: [{ email: payload.email, type: "office" }] }],
       }),
