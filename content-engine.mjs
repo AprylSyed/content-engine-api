@@ -160,7 +160,8 @@ async function pushToClose(payload, result) {
 
 export default async function handler(req) {
   const origin = req.headers.get("origin") || "";
-  if (req.method === "OPTIONS") return new Response("", { status: 204, headers: cors(origin) });
+  // 204 responses must have a NULL body — an empty string throws and 502s the preflight.
+  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors(origin) });
   if (req.method !== "POST") return new Response(JSON.stringify({ error: "POST only" }), { status: 405, headers: cors(origin) });
 
   let payload;
